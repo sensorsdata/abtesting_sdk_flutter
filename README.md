@@ -28,7 +28,7 @@ dependencies:
 
 ## 集成文档
 
-请参考神策官网 [Flutter 插件集成文档](https://www.sensorsdata.cn/manual/sdk_flutter.html)。
+请参考神策官网 [Flutter 插件集成文档](https://manual.sensorsdata.cn/sa/latest/tech_ab_testing_flutter-32079879.html)。
 
 
 ## 贡献
