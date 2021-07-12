@@ -1,0 +1,3 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.sensorsdata.analytics.abtesting.abtesting_sdk_flutter">
+</manifest>
