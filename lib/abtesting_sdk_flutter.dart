@@ -7,11 +7,13 @@ class SensorsABTest {
   static const MethodChannel _channel = const MethodChannel('sa_abtesting_sdk');
   static const int TIMEOUT_REQUEST = 30 * 1000;
 
-  // ///初始化 A/B Testing，在此之前请确保先初始化神策分析 SDK [参考文档](https://manual.sensorsdata.cn/sa/latest/tech_sdk_client_android_basic-17563982.html)。
-  // ///[url] 为服务器地址
-  // static void startWithConfigOptions(String url){
-  //   _channel.invokeMethod("startWithConfigOptions", url);
-  // }
+  ///初始化 A/B Testing，在此之前请确保先初始化神策分析 SDK：
+  ///[Android 参考文档](https://manual.sensorsdata.cn/sa/latest/tech_sdk_client_android_basic-17563982.html)，
+  ///[iOS 参考文档](https://manual.sensorsdata.cn/sa/latest/tech_sdk_client_ios_use-27724338.html)。
+  ///[url] 为服务器地址
+  static void startWithConfigOptions(String url){
+    _channel.invokeMethod("startWithConfigOptions", url);
+  }
 
   /// 从缓存中获取试验结果。[paramName] 是参数名称，[defaultValue] 是对应参数的默认值，
   /// 泛型 [T] 的支持类型包括：[int]、[String]、[bool] 和代表 JSON 的 [Map<String,dynamic>] 类型。

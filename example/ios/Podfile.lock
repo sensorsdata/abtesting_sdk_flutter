@@ -6,16 +6,17 @@ PODS:
   - sensors_analytics_flutter_plugin (2.0.0):
     - Flutter
     - SensorsAnalyticsSDK (>= 2.1.17)
-  - SensorsABTesting (0.0.4):
-    - SensorsAnalyticsSDK (>= 2.6.3)
-  - SensorsAnalyticsSDK (2.6.8):
-    - SensorsAnalyticsSDK/Core (= 2.6.8)
-  - SensorsAnalyticsSDK/AutoTrack (2.6.8):
+  - SensorsABTesting (0.1.0):
+    - SensorsAnalyticsSDK (>= 3.0.0)
+  - SensorsAnalyticsSDK (3.0.2):
+    - SensorsAnalyticsSDK/Core (= 3.0.2)
+  - SensorsAnalyticsSDK/AutoTrack (3.0.2):
     - SensorsAnalyticsSDK/Common
-  - SensorsAnalyticsSDK/Common (2.6.8)
-  - SensorsAnalyticsSDK/Core (2.6.8):
+  - SensorsAnalyticsSDK/Common (3.0.2)
+  - SensorsAnalyticsSDK/Core (3.0.2):
+    - SensorsAnalyticsSDK/Common
     - SensorsAnalyticsSDK/Visualized
-  - SensorsAnalyticsSDK/Visualized (2.6.8):
+  - SensorsAnalyticsSDK/Visualized (3.0.2):
     - SensorsAnalyticsSDK/AutoTrack
 
 DEPENDENCIES:
@@ -40,9 +41,9 @@ SPEC CHECKSUMS:
   abtesting_sdk_flutter: e43611513a82c30a8b3e070d3a535b944c354d2d
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   sensors_analytics_flutter_plugin: 09080518746dbc455182989f2839245f8c9c1fd9
-  SensorsABTesting: 38995a1d4b045956b758b8681edf7417fb1c84de
-  SensorsAnalyticsSDK: fdb4406623d56c88e9d45a51b57903426a563b18
+  SensorsABTesting: f441708cde9dd0a764e0c1b3d59bbbeb79a89d8e
+  SensorsAnalyticsSDK: 0d3ec178f0405eeea64d8a9aafc9b99b8ac812f9
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.2

@@ -17,9 +17,18 @@
         [self asyncFetchABTest:call result:result];
     } else if ([@"fastFetchABTest" isEqualToString:call.method]) {
         [self fastFetchABTest:call result:result];
+    } else if ([@"startWithConfigOptions" isEqualToString:call.method]) {
+        [self startWithConfigOptions:call result:result];
     } else {
         result(FlutterMethodNotImplemented);
     }
+}
+ 
+-(void)startWithConfigOptions:(FlutterMethodCall*)call result:(FlutterResult)result{
+    NSString* url = (NSString*)call.arguments;
+    SensorsABTestConfigOptions *abtestConfigOptions = [[SensorsABTestConfigOptions alloc] initWithURL:url];
+    [SensorsABTest startWithConfigOptions:abtestConfigOptions];
+    result(nil);
 }
 
 -(void)fetchCacheABTest:(FlutterMethodCall*)call result:(FlutterResult)result{
@@ -74,29 +83,26 @@
     }];
 }
 
-- (NSString *)convertToJsonData:(NSDictionary *)dict
-{
-    NSError *error;
-    NSData *jsonData;
+- (NSString *)convertToJsonData:(NSDictionary *)dict {
+    if (![NSJSONSerialization isValidJSONObject:dict]) {
+        NSLog(@"obj is not valid JSON: %@",dict);
+        return nil;
+    }
+
+    NSError *error = nil;
+    NSData *jsonData = nil;
     
     @try {
-        jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+        jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     } @catch (NSException *exception) {
         NSLog(@"%@",exception);
     }
-    
-    NSString *jsonString;
+
     if (!jsonData) {
-        NSLog(@"%@",error);
-    } else {
-        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"error: %@",error);
+        return nil;
     }
-    NSMutableString *mutStr = [NSMutableString stringWithString:jsonString];
-    NSRange range = {0,jsonString.length};
-    [mutStr replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:range];
-    NSRange range2 = {0,mutStr.length};
-    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
-    return mutStr;
+    return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 @end

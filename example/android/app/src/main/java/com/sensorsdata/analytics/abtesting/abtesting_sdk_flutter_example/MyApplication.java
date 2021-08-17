@@ -44,8 +44,8 @@ public class MyApplication extends Application {
                 .enableVisualizedAutoTrackConfirmDialog(true);
         SensorsDataAPI.startWithConfigOptions(this, configOptions);
 
-        SensorsABTestConfigOptions abTestConfigOptions = new SensorsABTestConfigOptions("http://abtesting.saas.debugbox.sensorsdata.cn/api/v2/abtest/online/results?project-key=438B9364C98D54371751BA82F6484A1A03A5155E");
-        SensorsABTest.startWithConfigOptions(this, abTestConfigOptions);
+//        SensorsABTestConfigOptions abTestConfigOptions = new SensorsABTestConfigOptions("http://abtesting.saas.debugbox.sensorsdata.cn/api/v2/abtest/online/results?project-key=438B9364C98D54371751BA82F6484A1A03A5155E");
+//        SensorsABTest.startWithConfigOptions(this, abTestConfigOptions);
 //
 //
 //        try {

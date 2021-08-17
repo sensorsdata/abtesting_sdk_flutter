@@ -21,7 +21,7 @@
     SAConfigOptions *options = [[SAConfigOptions alloc] initWithServerURL:kSABTestServerURL launchOptions:launchOptions];
 //    options.autoTrackEventType = SensorsAnalyticsEventTypeAppStart | SensorsAnalyticsEventTypeAppEnd | SensorsAnalyticsEventTypeAppClick | SensorsAnalyticsEventTypeAppViewScreen;
     options.autoTrackEventType = SensorsAnalyticsEventTypeAppEnd | SensorsAnalyticsEventTypeAppClick | SensorsAnalyticsEventTypeAppViewScreen;
-    options.enableTrackAppCrash = YES;
+    //options.enableTrackAppCrash = YES;
 
     options.enableHeatMap = YES;
     options.enableVisualizedAutoTrack = YES;
@@ -32,8 +32,8 @@
 
 //    [[SensorsAnalyticsSDK sharedInstance] setFlushNetworkPolicy:SensorsAnalyticsNetworkTypeALL];
 //
-    SensorsABTestConfigOptions *abtestConfigOptions = [[SensorsABTestConfigOptions alloc] initWithURL:kSABResultsTestURL];
-    [SensorsABTest startWithConfigOptions:abtestConfigOptions];
+    //SensorsABTestConfigOptions *abtestConfigOptions = [[SensorsABTestConfigOptions alloc] initWithURL:kSABResultsTestURL];
+    //[SensorsABTest startWithConfigOptions:abtestConfigOptions];
 //
     
   return [super application:application didFinishLaunchingWithOptions:launchOptions];

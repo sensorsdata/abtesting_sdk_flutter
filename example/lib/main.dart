@@ -37,22 +37,30 @@ class _MyAppState extends State<MyApp> {
               child: Text("fetchCacheABTest")),
           TextButton(
               onPressed: () async {
-                Map<String, dynamic>? result = await SensorsABTest.fetchABTest("int", {}, 3111);
+                Map<String, dynamic>? result =
+                    await SensorsABTest.fetchABTest("int", {}, 3111);
                 print("fetchABTest result is===$result");
               },
               child: Text("fetchABTest")),
           TextButton(
               onPressed: () async {
-                Map<String, dynamic>? result = await SensorsABTest.fastFetchABTest("int", {});
+                Map<String, dynamic>? result =
+                    await SensorsABTest.fastFetchABTest("int", {});
                 print("fastFetchABTest result is===$result");
               },
               child: Text("fastFetchABTest")),
           TextButton(
               onPressed: () async {
-                  SensorsAnalyticsFlutterPlugin.login("xiaoming-123123");
-                  print("login=====");
+                SensorsAnalyticsFlutterPlugin.login("xiaoming-123123");
+                print("login=====");
               },
               child: Text("login")),
+          TextButton(
+              onPressed: () async {
+                SensorsABTest.startWithConfigOptions("http://abtesting.saas.debugbox.sensorsdata.cn/api/v2/abtest/online/results?project-key=438B9364C98D54371751BA82F6484A1A03A5155E");
+                print("startWithConfigOptions=====");
+              },
+              child: Text("startWithConfigOptions")),
         ])),
       ),
     );

@@ -12,6 +12,12 @@
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/abtesting_sdk_flutter/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/abtesting_sdk_flutter/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/abtesting_sdk_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/sensors_analytics_flutter_plugin/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/sensors_analytics_flutter_plugin/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/sensors_analytics_flutter_plugin/build" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/sensors_analytics_flutter_plugin/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/sensors_analytics_flutter_plugin/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/example/ios/.symlinks/plugins/sensors_analytics_flutter_plugin/example/.dart_tool" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
