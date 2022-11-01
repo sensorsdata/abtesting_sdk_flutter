@@ -17,6 +17,36 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    SensorsAnalyticsFlutterPlugin.init(
+        serverUrl:
+        "http://10.130.6.4:8106/sa?project=default",
+        autoTrackTypes: <SAAutoTrackType>{
+          SAAutoTrackType.APP_START,
+          SAAutoTrackType.APP_VIEW_SCREEN,
+          SAAutoTrackType.APP_CLICK,
+          SAAutoTrackType.APP_END
+        },
+        networkTypes: <SANetworkType>{
+          SANetworkType.TYPE_2G,
+          SANetworkType.TYPE_3G,
+          SANetworkType.TYPE_4G,
+          SANetworkType.TYPE_WIFI,
+          SANetworkType.TYPE_5G
+        },
+        flushInterval: 30000,
+        flushBulkSize: 150,
+        enableLog: true,
+        javaScriptBridge: true,
+        encrypt: true,
+        heatMap: true,
+        visualized: VisualizedConfig(autoTrack: true, properties: true),
+        android: AndroidConfig(
+            maxCacheSize: 48 * 1024 * 1024,
+            jellybean: true,
+            subProcessFlush: true),
+        ios: IOSConfig(maxCacheSize: 10000),
+        globalProperties: {'aaa': 'aaa-value', 'bbb': 'bbb-value'});
+
   }
 
   @override
@@ -44,8 +74,8 @@ class _MyAppState extends State<MyApp> {
               child: Text("fetchABTest")),
           TextButton(
               onPressed: () async {
-                Map<String, dynamic>? result =
-                    await SensorsABTest.fastFetchABTest("int", {});
+                String? result =
+                    await SensorsABTest.fastFetchABTest<String>("param_cat", "should_be_a_cat");
                 print("fastFetchABTest result is===$result");
               },
               child: Text("fastFetchABTest")),
