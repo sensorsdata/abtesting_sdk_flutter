@@ -19,19 +19,33 @@
         [self fastFetchABTest:call result:result];
     } else if ([@"startWithConfigOptions" isEqualToString:call.method]) {
         [self startWithConfigOptions:call result:result];
+    } else if ([@"setCustomIDs" isEqualToString:call.method]) {
+        [self setCustomIDs:call result:result];
+    } else if ([@"setCustomProperties" isEqualToString:call.method]) {
+        [self setCustomProperties:call result:result];
+    } else if ([@"fastFetchABTestWithExperiment" isEqualToString:call.method]) {
+        [self fastFetchABTestWithExperiment:call result:result];
+    } else if ([@"asyncFetchABTestWithExperiment" isEqualToString:call.method]) {
+        [self asyncFetchABTestWithExperiment:call result:result];
     } else {
         result(FlutterMethodNotImplemented);
     }
 }
  
--(void)startWithConfigOptions:(FlutterMethodCall*)call result:(FlutterResult)result{
-    NSString* url = (NSString*)call.arguments;
-    SensorsABTestConfigOptions *abtestConfigOptions = [[SensorsABTestConfigOptions alloc] initWithURL:url];
+- (void)startWithConfigOptions:(FlutterMethodCall*)call result:(FlutterResult)result{
+    NSDictionary *args = call.arguments;
+    NSString *urlString = args[@"urlString"];
+    NSDictionary *customProperties = args[@"customProperties"];
+
+    SensorsABTestConfigOptions *abtestConfigOptions = [[SensorsABTestConfigOptions alloc] initWithURL:urlString];
+    if (customProperties != nil && [customProperties isKindOfClass:[NSDictionary class]]) {
+        abtestConfigOptions.customProperties = customProperties;
+    }
     [SensorsABTest startWithConfigOptions:abtestConfigOptions];
     result(nil);
 }
 
--(void)fetchCacheABTest:(FlutterMethodCall*)call result:(FlutterResult)result{
+- (void)fetchCacheABTest:(FlutterMethodCall*)call result:(FlutterResult)result{
     NSArray* arguments = (NSArray *)call.arguments;
     if (arguments.count < 2) {
         result(nil);
@@ -46,7 +60,7 @@
     result(finalresult);
 }
 
--(void)asyncFetchABTest:(FlutterMethodCall*)call result:(FlutterResult)flutterResult {
+- (void)asyncFetchABTest:(FlutterMethodCall*)call result:(FlutterResult)flutterResult {
     NSArray* arguments = (NSArray *)call.arguments;
     if (arguments.count < 3) {
         flutterResult(nil);
@@ -64,13 +78,8 @@
     }];
 }
 
--(void)fastFetchABTest:(FlutterMethodCall*)call result:(FlutterResult)flutterResult {
+- (void)fastFetchABTest:(FlutterMethodCall*)call result:(FlutterResult)flutterResult {
     NSArray* arguments = (NSArray *)call.arguments;
-    if (arguments.count < 3) {
-        flutterResult(nil);
-        return;
-    }
-    
     NSString* paramName = arguments[0];
     double second = [arguments[2] doubleValue] / 1000;
 
@@ -83,6 +92,66 @@
     }];
 }
 
+- (void)fastFetchABTestWithExperiment:(FlutterMethodCall*)call result:(FlutterResult)flutterResult {
+    NSArray* arguments = (NSArray *)call.arguments;
+    if (arguments.count == 0) {
+        flutterResult(nil);
+        return;
+    }
+    
+    NSDictionary *experimentDic = arguments[0];
+    SensorsABTestExperiment *experiment = [SensorsABTestExperiment experimentWithParamName:experimentDic[@"paramName"] defaultValue:experimentDic[@"defaultValue"]];
+    if (experimentDic[@"timeoutInterval"]) {
+        experiment.timeoutInterval = [experimentDic[@"timeoutInterval"] doubleValue] / 1000;
+    }
+    experiment.properties = experimentDic[@"properties"];
+
+    [[SensorsABTest sharedInstance] fastFetchABTestWithExperiment:experiment completionHandler:^(id  _Nullable finalresult) {
+        if([finalresult isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* dic = finalresult;
+            finalresult = [self convertToJsonData:dic];
+        }
+        flutterResult(finalresult);
+    }];
+}
+
+- (void)asyncFetchABTestWithExperiment:(FlutterMethodCall*)call result:(FlutterResult)flutterResult {
+    NSArray* arguments = (NSArray *)call.arguments;
+    if (arguments.count == 0) {
+        flutterResult(nil);
+        return;
+    }
+    
+    NSDictionary *experimentDic = arguments[0];
+    SensorsABTestExperiment *experiment = [SensorsABTestExperiment experimentWithParamName:experimentDic[@"paramName"] defaultValue:experimentDic[@"defaultValue"]];
+    if (experimentDic[@"timeoutInterval"]) {
+        experiment.timeoutInterval = [experimentDic[@"timeoutInterval"] doubleValue] / 1000;
+    }
+    experiment.properties = experimentDic[@"properties"];
+
+    [[SensorsABTest sharedInstance] asyncFetchABTestWithExperiment:experiment completionHandler:^(id  _Nullable finalresult) {
+        if([finalresult isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* dic = finalresult;
+            finalresult = [self convertToJsonData:dic];
+        }
+        flutterResult(finalresult);
+    }];
+}
+
+
+- (void)setCustomIDs:(FlutterMethodCall*)call result:(FlutterResult)result {
+    NSDictionary *customIDs = call.arguments;
+    [[SensorsABTest sharedInstance] setCustomIDs:customIDs];
+    result(nil);
+}
+
+- (void)setCustomProperties:(FlutterMethodCall*)call result:(FlutterResult)result {
+    NSDictionary *customProperties = call.arguments;
+    [[SensorsABTest sharedInstance] setCustomProperties:customProperties];
+    result(nil);
+}
+
+/// NSDictionary 转 JSON 字符串
 - (NSString *)convertToJsonData:(NSDictionary *)dict {
     if (![NSJSONSerialization isValidJSONObject:dict]) {
         NSLog(@"obj is not valid JSON: %@",dict);

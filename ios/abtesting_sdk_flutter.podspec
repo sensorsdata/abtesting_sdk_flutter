@@ -4,19 +4,19 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'abtesting_sdk_flutter'
-  s.version          = '0.0.3'
+  s.version          = '1.0.0'
   s.summary          = 'A/B Testing Flutter Plugin'
   s.description      = <<-DESC
 A/B Testing Flutter Plugin
                        DESC
   s.homepage         = 'http://github.com/sensorsdata/abtesting_sdk_flutter'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'SensorsData' => 'zhangwei@sensorsdata.cn' }
+  s.author           = { 'SensorsData' => 'chuqiangsheng@sensorsdata.cn' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '9.0'
   s.dependency  'SensorsABTesting'
 
   # Flutter.framework does not contain a i386 slice.
